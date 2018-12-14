@@ -1,12 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import DatoCmsPlugin from 'datocms-plugins-sdk'
+import React from 'react'
+import { render } from 'react-dom'
+
 import App from './App';
-import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+DatoCmsPlugin.init().then(plugin => {
+    plugin.startAutoResizer();
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+    render(<App modelName={plugin.itemType.attributes.api_key} />, document.body);
+});
